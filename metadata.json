@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix CityCare - Hospital Appointment Management System",
+  "description": "City-based hospital search, symptom-speciality matching, doctor appointment booking with double-booking prevention, cash and demo payment, and role-based portals for Patients, Doctors, Receptionists, and Admins.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
