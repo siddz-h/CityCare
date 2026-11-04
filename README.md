@@ -15,7 +15,7 @@
 
 <p align="center">
   <a href="https://ais-pre-cefe6u3zggwfiu6fe5x5gk-530948025475.asia-east1.run.app">
-    <img src="./public/assets/aistudio/image_fb512120.png" alt="CityCare AI-Powered Triage & Smart Booking Banner" width="100%" />
+    <img src="./public/assets/aistudio/image_640951a6.png" alt="CityCare AI-Powered Triage, Emergency 108 Simulator & Smart Booking" width="100%" />
   </a>
 </p>
 
@@ -27,13 +27,13 @@ Most college or portfolio "Hospital Management" projects are simple static CRUD 
 
 **CityCare was engineered from the ground up to solve 5 real-world healthcare bottlenecks faced by patients and hospitals across Tier-1, Tier-2, and Tier-3 Indian cities (such as Amalner, Jalgaon, Dhule, Nashik, Pune, and Mumbai):**
 
-### 🌍 1. The "Which Specialist Do I Need?" Triage Gap
-* **The Real-World Problem:** A patient experiencing *"chest heaviness while walking"* or a parent with a *"child having fever and cough"* often does not know whether to book a Pulmonologist, Cardiologist, General Physician, or Pediatrician. Booking the wrong specialist wastes consultation fees and delays critical care.
-* **How CityCare Solves It:** Our **Smart Booking AI Triage Engine** (powered by Gemini + a deterministic 11-specialty clinical rule fallback) analyzes plain-language or voice-spoken symptoms, detects **Red-Flag Medical Emergencies** (e.g., acute chest pain, stroke signs, severe breathlessness), explains *why* a specific department is recommended, and immediately surfaces real-time available slots at nearby verified hospitals.
+### 🌍 1. The "Which Specialist Do I Need?" Triage Gap & Interactive Body Map
+* **The Real-World Problem:** A patient experiencing *"chest heaviness while walking"* or a parent with a *"child having fever and cold"* often does not know whether to book a Pulmonologist, Cardiologist, General Physician, or Pediatrician. Booking the wrong specialist wastes consultation fees and delays critical care.
+* **How CityCare Solves It:** Our **Smart Booking AI Triage Engine** (with **Voice Input**, **Quick Concerns**, and an **Interactive Body Map**) analyzes symptoms, identifies the **Target Specialty**, assigns **Clinical Priority** (`Routine`, `Medium Care`, `High`, or `Emergency`), estimates **OPD Queue Wait Time** (`~10–15 mins`), and surfaces verified doctors with one-click live time slots. It also includes an interactive **Emergency & 108 Ambulance Simulator** for project showcase demonstrations.
 
 ### ⏱️ 2. Real-Time Indian Standard Time (IST) Slot Locking (No Fake Past Bookings)
-* **The Real-World Problem:** Regular medical apps let users book a `09:00 AM` slot for "Today" even when the real clock time is `08:30 PM` at night.
-* **How CityCare Solves It:** CityCare runs a **Live Internet-Synchronized IST Clock Engine (`Asia/Kolkata`)** on both client and server. If a patient opens the app at `04:15 PM IST`, all morning (`09:00 AM – 12:00 PM`) and early afternoon (`02:00 PM – 04:00 PM`) slots for Today are **automatically locked in real time**, guiding the patient to remaining evening OPD slots (`05:30 PM – 09:30 PM`) or auto-advancing to Tomorrow if Today's OPD has closed.
+* **The Real-World Problem:** Regular medical apps let users book a `09:00 AM` slot for "Today" even when the real clock time is `10:35 PM` at night.
+* **How CityCare Solves It:** CityCare runs a **Live Internet-Synchronized IST Clock Engine (`Asia/Kolkata`)** on both client and server. If a patient opens the app late in the evening or night, all past morning (`09:00 AM – 12:00 PM`) and afternoon (`12:00 PM – 05:00 PM`) slots for Today are **automatically locked in real time**, guiding the patient to remaining evening OPD slots or auto-advancing to Tomorrow's verified schedule.
 
 ### 🛡️ 3. 3-Layer Atomic Double-Booking & Overlap Prevention
 * **The Real-World Problem:** In basic booking apps, two patients can book the same doctor at `10:30 AM`, or a single patient can accidentally book two different doctors at the exact same time across different hospitals.
@@ -46,11 +46,11 @@ Most college or portfolio "Hospital Management" projects are simple static CRUD 
 * **The Real-World Problem:** In Indian OPDs, hundreds of patients crowd outside consultation cabins asking *"Mera number kab aayega?"* while struggling with English-only interfaces.
 * **How CityCare Solves It:**
   * **Live Waiting Room TV Queue Mode:** A dedicated hospital corridor display showing `NOW SERVING` tokens, cabin numbers, and `UP NEXT` queues in real time.
-  * **Multilingual Voice Callouts (`EN` / `हिन्दी` / `मराठी`):** Built-in Web Speech synthesis announces tokens aloud (e.g., *"Token OPD-AMA-204, please proceed to Cabin 102"*), alongside full UI localization in **English, Hindi, and Marathi**.
+  * **Multilingual Voice Callouts (`EN` / `हिन्दी` / `मराठी`):** Built-in Web Speech synthesis announces tokens aloud (e.g., *"Token OPD-PUN-204, please proceed to Cabin 102"*), alongside full UI localization in **English, Hindi, and Marathi**.
 
-### 🗺️ 5. Live OpenStreetMap Hospital Discovery & Road Routing (Beyond Hardcoded Data)
-* **The Real-World Problem:** Most demo apps only work for 3 hardcoded dummy hospitals.
-* **How CityCare Solves It:** CityCare connects to **OpenStreetMap Overpass & Nominatim APIs** to dynamically discover real hospitals and clinics in any searched town or city, calculates **real OSRM road routes and travel times**, and includes a scroll-safe interactive map (`Ctrl + Scroll` / toggleable zoom) so page scrolling is never hijacked.
+### 🗺️ 5. Live OpenStreetMap Hospital Discovery & Scroll-Safe Clinical Map
+* **The Real-World Problem:** Most demo apps only work for 3 hardcoded dummy hospitals, and embedded maps often trap page scrolling.
+* **How CityCare Solves It:** CityCare connects to **OpenStreetMap Overpass & Nominatim APIs** to dynamically discover real hospitals and clinics in any searched town or city, displays live **General / ICU / Ventilator bed availability**, calculates **real OSRM road routes**, and includes a scroll-safe interactive map (`Scroll Zoom: Off (Ctrl + Scroll)` toggle) so page scrolling is never hijacked.
 
 ---
 
@@ -58,54 +58,59 @@ Most college or portfolio "Hospital Management" projects are simple static CRUD 
 
 | Capability | Typical Student / Regular Medical App | 🏥 CityCare Clinical OS (This Repository) |
 | :--- | :--- | :--- |
-| **Symptom Understanding** | ❌ User must manually guess the medical department | ✅ **AI + Clinical Rule Triage** maps symptoms & voice input directly to verified specialists & available slots |
-| **Time Awareness** | ❌ Allows booking 9:00 AM today even at 10:00 PM night | ✅ **Live IST (`Asia/Kolkata`) Clock Sync** auto-locks past slots & auto-advances when OPD hours end |
+| **Symptom Understanding** | ❌ User must manually guess the medical department | ✅ **AI + Interactive Body Map Triage** maps symptoms & voice input directly to verified specialists & live slots |
+| **Time Awareness** | ❌ Allows booking 9:00 AM today even at 10:35 PM night | ✅ **Live IST (`Asia/Kolkata`) Clock Sync** auto-locks past slots & auto-advances when OPD hours end |
 | **Conflict Handling** | ❌ Basic insert; allows double-booking & overlapping times | ✅ **3-Layer Atomic Lock** (Doctor collision + Patient overlap + Emergency surgery slot blocks) |
-| **Geographic Coverage** | ❌ 3–4 hardcoded dummy cards | ✅ **Dynamic OpenStreetMap Overpass Discovery** + real OSRM road distance & turn-by-turn routing |
-| **Waiting Room Flow** | ❌ Static "Pending / Approved" text badge | ✅ **4-Stage Live OPD Tracker** (`Booked` → `Checked In` → `In Cabin` → `Completed`) + **Live TV Board & Voice Callouts** |
-| **Regional Accessibility** | ❌ English-only interface | ✅ **Trilingual Support** (`English`, `हिन्दी`, `मराठी`) + Printable Digital OPD Token Slips & Health Vault |
+| **Geographic Coverage** | ❌ 3–4 hardcoded dummy cards | ✅ **Dynamic OpenStreetMap Overpass Discovery** + real OSRM road distance & scroll-safe clinical map |
+| **Payment & Token Flow** | ❌ Simple form submit with no payment simulation | ✅ **Dual Payment Engine** (`Cash at Hospital Desk` or **Instant UPI / QR / Card Sandbox Gateway**) with instant OPD token verification |
+| **Emergency & Queue Flow** | ❌ Static "Pending / Approved" text badge | ✅ **108 Ambulance & ER Simulator** + **4-Stage Live OPD Tracker** (`Booked` → `Checked In` → `In Cabin` → `Completed`) |
 | **Multi-Role Ecosystem** | ❌ Usually only Patient + basic Admin table | ✅ **4 Complete Workspaces**: Patient Portal, Doctor Console (Vitals/Rx), Receptionist Walk-In Desk, & Admin Audit Center |
 
 ---
 
-## 📸 Platform Walkthrough & Screenshots
+## 📸 Platform Walkthrough & Section Screenshots
 
-### 1. AI-Powered Symptom Triage & Smart Booking
-Describe symptoms in natural language (or via voice input) to automatically identify the right medical department, clinical urgency level, and real-time available doctors with nearby hospital route mapping.
+### 1. AI-Powered Triage, Interactive Body Map & 108 Emergency Simulator
+Describe symptoms via natural language, **Voice Input**, or the **Interactive Body Map**. CityCare automatically determines the **Target Specialty**, **Clinical Priority**, and **Estimated OPD Queue Time**, while syncing with live **Internet Time (IST)** to display verified available slots and nearby hospital routes.
 
-![AI-Powered Symptom Triage & Smart Booking](./public/assets/aistudio/image_fb512120.png)
-
----
-
-### 2. Regional Hospital & Specialist Discovery
-Search across Tier-2/Tier-3 towns and metro cities (Amalner, Jalgaon, Nashik, Dhule, Pune, Mumbai, and nationwide via OpenStreetMap Overpass discovery) with specialty filters and live bed availability.
-
-![Hospital & Specialist Discovery](./public/assets/aistudio/image_2a72c899.png)
+![AI-Powered Triage & Smart Booking](./public/assets/aistudio/image_640951a6.png)
 
 ---
 
-### 3. Live IST Slot Selection & Double-Booking Prevention
-Real-time OPD slot booking synchronized with Indian Standard Time (`Asia/Kolkata`) that automatically locks past time slots for today and prevents overlapping appointments.
+### 2. Hospital Network, Live Bed Availability & Interactive Clinical Map
+Search across cities and towns (Amalner, Jalgaon, Nashik, Dhule, Pune, Mumbai, and nationwide via OpenStreetMap Overpass discovery) with specialty filters, real-time **General / ICU / Ventilator bed status**, and an interactive **OpenStreetMap Clinical Map** with scroll-trap protection (`Scroll Zoom: Off (Ctrl + Scroll)`).
 
-| Dark Glassmorphism Booking Flow | Clinical Light Booking Flow |
-| :---: | :---: |
-| ![Dark Theme Booking Modal](./public/assets/aistudio/image_9c1e67ea.png) | ![Light Theme Booking Modal](./public/assets/aistudio/image_daf5cb81.png) |
+![Hospitals, Live Bed Status & Interactive Clinical Map](./public/assets/aistudio/image_1cf8573f.png)
 
 ---
 
-### 4. Patient Visits, Digital OPD Token & Live Queue Tracker
-Track active and completed visits with unique OPD tokens (e.g., `OPD-MUM-101`), real-time consultation stage progress (`Booked` → `Checked In` → `In Cabin` → `Completed`), digital OPD slips, and doctor notes.
+### 3. Verified Medical Specialists Directory
+Browse verified doctors filtered by city and medical specialty (`Cardiology`, `Orthopedics`, `Neurology`, `General Medicine`, `Pulmonology`, `Dermatology`, `Dental`, `Pediatrics`, `Gastroenterology`) with qualifications, years of clinical experience, hospital affiliation, consultation fees, and instant slot booking.
 
-![Patient Visits & Live OPD Status](./public/assets/aistudio/image_d06483ab.png)
+![Medical Specialists Directory](./public/assets/aistudio/image_550c3d7b.png)
+
+---
+
+### 4. Live IST Slot Selection & Conflict-Free Appointment Booking
+Book appointments with real-time **Indian Standard Time (`LIVE IST`)** synchronization that automatically locks past slots for Today, pre-fills verified patient details, and supports both **Cash at Desk** and **Online Instant Pay**.
+
+![Live IST Appointment Booking Modal](./public/assets/aistudio/image_8e081e84.png)
+
+---
+
+### 5. CityCare Secure Payment Gateway (UPI / QR / Card / NetBanking Sandbox)
+Zero-wait OPD token verification with an interactive payment sandbox supporting **UPI ID / VPA** (`Google Pay`, `PhonePe`, `Paytm`, `BHIM UPI`), **Instant UPI QR Simulation**, **Card**, and **NetBanking** authorization.
+
+![CityCare Secure Payment Gateway Sandbox](./public/assets/aistudio/image_310895c5.png)
 
 ---
 
 ## 🧩 Complete Multi-Role Architecture
 
 1. **👤 Patient Workspace**
-   - AI Symptom Triage & Smart Slot Recommendation
-   - Interactive OpenStreetMap Hospital Finder with OSRM road routing
-   - Instant OPD Token Generation (`OPD-<CITY>-<NUM>`) & printable OPD Receipt
+   - AI Symptom Triage, Interactive Body Map, & Smart Slot Recommendation
+   - Interactive OpenStreetMap Hospital Finder with live ICU/Ventilator bed counters & OSRM road routing
+   - Instant OPD Token Generation (`OPD-<CITY>-<NUM>`), UPI/QR Payment Sandbox, & printable OPD Receipt
    - Digital **Health Vault** for storing lab reports, prescriptions, and vitals history
 2. **🩺 Doctor Clinical Console**
    - Live cabin queue management (`Call Next Patient`, `Start Consultation`, `Complete Visit`)
@@ -136,7 +141,7 @@ Track active and completed visits with unique OPD tokens (e.g., `OPD-MUM-101`), 
 
 ```text
 ├── public/
-│   └── assets/aistudio/       # Application UI screenshots & visual assets
+│   └── assets/aistudio/       # Application section screenshots
 ├── src/
 │   ├── components/            # Modular UI components (HospitalMap, SmartBookingAI, Navbar, etc.)
 │   ├── services/              # Frontend API client & data synchronization
