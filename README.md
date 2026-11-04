@@ -1,36 +1,171 @@
-# CityCare Hospital Appointment System
+# 🏥 CityCare — Real-World Smart Hospital OPD & Clinical Triage OS
 
-The CityCare Hospital Appointment System is a healthcare management platform designed to streamline appointment booking, triage, and administrative workflows for hospital staff and patients.
+<div align="center">
 
-## Project Overview
-This application serves as a comprehensive portal for patients to book appointments, view hospital data, check symptoms, and manage medical history, while providing dashboards for doctors, receptionists, and administrators.
+### 🌐 **[🚀 Click Here to Open Live Project Demo](https://ais-pre-cefe6u3zggwfiu6fe5x5gk-530948025475.asia-east1.run.app)**
+**Live URL:** [`https://ais-pre-cefe6u3zggwfiu6fe5x5gk-530948025475.asia-east1.run.app`](https://ais-pre-cefe6u3zggwfiu6fe5x5gk-530948025475.asia-east1.run.app)
 
-## Technology Stack
-- **Frontend**: React, Vite, Tailwind CSS
-- **Backend**: Node.js, Express
-- **Persistence**: JSON file-based database (`/data/db.json`)
-- **Integration**: Gemini API (for Smart Booking AI triage)
+[![Live Demo](https://img.shields.io/badge/LIVE%20PROJECT-OPEN%20CITYCARE%20APP-A3E635?style=for-the-badge&logo=googlechrome&logoColor=black)](https://ais-pre-cefe6u3zggwfiu6fe5x5gk-530948025475.asia-east1.run.app)
+[![Frontend](https://img.shields.io/badge/Frontend-React%2019%20%2B%20TypeScript-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Styling](https://img.shields.io/badge/Styling-Tailwind%20CSS%204-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Backend](https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Maps](https://img.shields.io/badge/Maps-Leaflet%20%2B%20OpenStreetMap-199900?style=for-the-badge&logo=openstreetmap&logoColor=white)](https://www.openstreetmap.org/)
 
-## Key Features
-- **Smart Booking AI**: Symptom-based triage and doctor recommendation.
-- **Appointment Booking**: Real-time slot selection and conflict prevention.
-- **Hospital Discovery**: OpenStreetMap-based facility discovery.
-- **Patient Portal**: Appointment tracking and health records.
-- **Admin/Staff Dashboards**: Analytics, audit logs, and user role management.
+</div>
 
-## Project Structure
-- `/src/components`: React components for UI modules.
-- `/src/services`: API interaction layer.
-- `/data`: JSON database.
-- `server.ts`: Express backend implementation.
+<p align="center">
+  <a href="https://ais-pre-cefe6u3zggwfiu6fe5x5gk-530948025475.asia-east1.run.app">
+    <img src="./public/assets/aistudio/image_fb512120.png" alt="CityCare AI-Powered Triage & Smart Booking Banner" width="100%" />
+  </a>
+</p>
 
-## Setup & Execution
-1. Install dependencies: `npm install`
-2. Configure environment variables (refer to `.env.example`).
-3. Run the development server: `npm run dev`
+---
 
-## Important Notes
-- The Smart Booking feature includes a rule-based fallback if the Gemini API is unavailable.
-- Data persistence is achieved via a local JSON file for the demo.
-- API keys must be managed server-side.
-- The project is currently under redesign to adopt a premium health-tech dashboard aesthetic.
+## 🔥 Why CityCare Is NOT Just Another Regular Medical CRUD Project
+
+Most college or portfolio "Hospital Management" projects are simple static CRUD forms where a user picks a random doctor from a hardcoded list, selects any date/time (even in the past), and submits a form into a table. **They fail completely when tested against real-world Indian outpatient (OPD) workflows.**
+
+**CityCare was engineered from the ground up to solve 5 real-world healthcare bottlenecks faced by patients and hospitals across Tier-1, Tier-2, and Tier-3 Indian cities (such as Amalner, Jalgaon, Dhule, Nashik, Pune, and Mumbai):**
+
+### 🌍 1. The "Which Specialist Do I Need?" Triage Gap
+* **The Real-World Problem:** A patient experiencing *"chest heaviness while walking"* or a parent with a *"child having fever and cough"* often does not know whether to book a Pulmonologist, Cardiologist, General Physician, or Pediatrician. Booking the wrong specialist wastes consultation fees and delays critical care.
+* **How CityCare Solves It:** Our **Smart Booking AI Triage Engine** (powered by Gemini + a deterministic 11-specialty clinical rule fallback) analyzes plain-language or voice-spoken symptoms, detects **Red-Flag Medical Emergencies** (e.g., acute chest pain, stroke signs, severe breathlessness), explains *why* a specific department is recommended, and immediately surfaces real-time available slots at nearby verified hospitals.
+
+### ⏱️ 2. Real-Time Indian Standard Time (IST) Slot Locking (No Fake Past Bookings)
+* **The Real-World Problem:** Regular medical apps let users book a `09:00 AM` slot for "Today" even when the real clock time is `08:30 PM` at night.
+* **How CityCare Solves It:** CityCare runs a **Live Internet-Synchronized IST Clock Engine (`Asia/Kolkata`)** on both client and server. If a patient opens the app at `04:15 PM IST`, all morning (`09:00 AM – 12:00 PM`) and early afternoon (`02:00 PM – 04:00 PM`) slots for Today are **automatically locked in real time**, guiding the patient to remaining evening OPD slots (`05:30 PM – 09:30 PM`) or auto-advancing to Tomorrow if Today's OPD has closed.
+
+### 🛡️ 3. 3-Layer Atomic Double-Booking & Overlap Prevention
+* **The Real-World Problem:** In basic booking apps, two patients can book the same doctor at `10:30 AM`, or a single patient can accidentally book two different doctors at the exact same time across different hospitals.
+* **How CityCare Solves It:** Every booking and reschedule request passes through a strict **3-Layer Server Lock**:
+  1. **Doctor Leave / Emergency Surgery Block Check:** Verifies the doctor hasn't blocked that slot for an emergency procedure.
+  2. **Doctor Slot Collision Lock:** Guarantees no two active patients can ever claim the same doctor, date, and time slot.
+  3. **Same-Patient Time-Overlap Lock:** Prevents the same patient (matched by ID, phone, or email) from booking two simultaneous appointments at `10:30 AM` on the same day.
+
+### 📺 4. Chaotic Hospital Waiting Rooms & Multilingual Accessibility
+* **The Real-World Problem:** In Indian OPDs, hundreds of patients crowd outside consultation cabins asking *"Mera number kab aayega?"* while struggling with English-only interfaces.
+* **How CityCare Solves It:**
+  * **Live Waiting Room TV Queue Mode:** A dedicated hospital corridor display showing `NOW SERVING` tokens, cabin numbers, and `UP NEXT` queues in real time.
+  * **Multilingual Voice Callouts (`EN` / `हिन्दी` / `मराठी`):** Built-in Web Speech synthesis announces tokens aloud (e.g., *"Token OPD-AMA-204, please proceed to Cabin 102"*), alongside full UI localization in **English, Hindi, and Marathi**.
+
+### 🗺️ 5. Live OpenStreetMap Hospital Discovery & Road Routing (Beyond Hardcoded Data)
+* **The Real-World Problem:** Most demo apps only work for 3 hardcoded dummy hospitals.
+* **How CityCare Solves It:** CityCare connects to **OpenStreetMap Overpass & Nominatim APIs** to dynamically discover real hospitals and clinics in any searched town or city, calculates **real OSRM road routes and travel times**, and includes a scroll-safe interactive map (`Ctrl + Scroll` / toggleable zoom) so page scrolling is never hijacked.
+
+---
+
+## ⚡ Quick Comparison: Regular Medical Project vs. CityCare OS
+
+| Capability | Typical Student / Regular Medical App | 🏥 CityCare Clinical OS (This Repository) |
+| :--- | :--- | :--- |
+| **Symptom Understanding** | ❌ User must manually guess the medical department | ✅ **AI + Clinical Rule Triage** maps symptoms & voice input directly to verified specialists & available slots |
+| **Time Awareness** | ❌ Allows booking 9:00 AM today even at 10:00 PM night | ✅ **Live IST (`Asia/Kolkata`) Clock Sync** auto-locks past slots & auto-advances when OPD hours end |
+| **Conflict Handling** | ❌ Basic insert; allows double-booking & overlapping times | ✅ **3-Layer Atomic Lock** (Doctor collision + Patient overlap + Emergency surgery slot blocks) |
+| **Geographic Coverage** | ❌ 3–4 hardcoded dummy cards | ✅ **Dynamic OpenStreetMap Overpass Discovery** + real OSRM road distance & turn-by-turn routing |
+| **Waiting Room Flow** | ❌ Static "Pending / Approved" text badge | ✅ **4-Stage Live OPD Tracker** (`Booked` → `Checked In` → `In Cabin` → `Completed`) + **Live TV Board & Voice Callouts** |
+| **Regional Accessibility** | ❌ English-only interface | ✅ **Trilingual Support** (`English`, `हिन्दी`, `मराठी`) + Printable Digital OPD Token Slips & Health Vault |
+| **Multi-Role Ecosystem** | ❌ Usually only Patient + basic Admin table | ✅ **4 Complete Workspaces**: Patient Portal, Doctor Console (Vitals/Rx), Receptionist Walk-In Desk, & Admin Audit Center |
+
+---
+
+## 📸 Platform Walkthrough & Screenshots
+
+### 1. AI-Powered Symptom Triage & Smart Booking
+Describe symptoms in natural language (or via voice input) to automatically identify the right medical department, clinical urgency level, and real-time available doctors with nearby hospital route mapping.
+
+![AI-Powered Symptom Triage & Smart Booking](./public/assets/aistudio/image_fb512120.png)
+
+---
+
+### 2. Regional Hospital & Specialist Discovery
+Search across Tier-2/Tier-3 towns and metro cities (Amalner, Jalgaon, Nashik, Dhule, Pune, Mumbai, and nationwide via OpenStreetMap Overpass discovery) with specialty filters and live bed availability.
+
+![Hospital & Specialist Discovery](./public/assets/aistudio/image_2a72c899.png)
+
+---
+
+### 3. Live IST Slot Selection & Double-Booking Prevention
+Real-time OPD slot booking synchronized with Indian Standard Time (`Asia/Kolkata`) that automatically locks past time slots for today and prevents overlapping appointments.
+
+| Dark Glassmorphism Booking Flow | Clinical Light Booking Flow |
+| :---: | :---: |
+| ![Dark Theme Booking Modal](./public/assets/aistudio/image_9c1e67ea.png) | ![Light Theme Booking Modal](./public/assets/aistudio/image_daf5cb81.png) |
+
+---
+
+### 4. Patient Visits, Digital OPD Token & Live Queue Tracker
+Track active and completed visits with unique OPD tokens (e.g., `OPD-MUM-101`), real-time consultation stage progress (`Booked` → `Checked In` → `In Cabin` → `Completed`), digital OPD slips, and doctor notes.
+
+![Patient Visits & Live OPD Status](./public/assets/aistudio/image_d06483ab.png)
+
+---
+
+## 🧩 Complete Multi-Role Architecture
+
+1. **👤 Patient Workspace**
+   - AI Symptom Triage & Smart Slot Recommendation
+   - Interactive OpenStreetMap Hospital Finder with OSRM road routing
+   - Instant OPD Token Generation (`OPD-<CITY>-<NUM>`) & printable OPD Receipt
+   - Digital **Health Vault** for storing lab reports, prescriptions, and vitals history
+2. **🩺 Doctor Clinical Console**
+   - Live cabin queue management (`Call Next Patient`, `Start Consultation`, `Complete Visit`)
+   - Record patient vitals (BP, Heart Rate, SpO2, Temperature) & digital prescriptions
+   - **Emergency Slot Blocker**: Block specific dates/slots for surgeries or leave with instant conflict protection
+3. **🖥️ Receptionist Front-Desk**
+   - Instant **Walk-In OPD Token Registration** for offline/elderly patients arriving at the hospital desk
+   - One-click patient check-in, cabin assignment, and cash/online fee verification
+4. **🛡️ Hospital Admin Command Center**
+   - Real-time hospital bed occupancy & department utilization charts
+   - Immutable **System Audit Trail** logging every booking, reschedule, status change, and slot block
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | React 19, TypeScript, Vite, Tailwind CSS 4, Lucide Icons, Recharts |
+| **Maps & Geolocation** | React-Leaflet, Leaflet, OpenStreetMap Nominatim & Overpass API, OSRM Routing |
+| **Backend** | Node.js, Express (`server.ts`), RESTful API with IST Time Authority (`/api/time`) |
+| **AI Integration** | `@google/genai` (Gemini Flash Lite for symptom triage + deterministic clinical rule fallback) |
+| **Persistence** | Local JSON document store (`/data/db.json`) with automatic seeding & audit logging |
+
+---
+
+## 📁 Repository Structure
+
+```text
+├── public/
+│   └── assets/aistudio/       # Application UI screenshots & visual assets
+├── src/
+│   ├── components/            # Modular UI components (HospitalMap, SmartBookingAI, Navbar, etc.)
+│   ├── services/              # Frontend API client & data synchronization
+│   ├── utils/                 # Live IST clock sync, translations (EN/HI/MR), sound & speech helpers
+│   ├── App.tsx                # Main application state, routing, and multi-role views
+│   └── types.ts               # Shared TypeScript interfaces
+├── data/
+│   └── db.json                # Persistent JSON database (hospitals, doctors, appointments, logs)
+├── server.ts                  # Express backend server, API routes, 3-layer booking lock, and AI triage
+└── package.json               # Scripts and dependencies
+```
+
+---
+
+## 🚀 Getting Started Locally
+
+1. **Clone the repository & install dependencies**
+   ```bash
+   npm install
+   ```
+
+2. **Configure environment variables**
+   Copy `.env.example` to `.env` and add your Gemini API key (optional — the system automatically uses its built-in clinical rule engine if no API key is configured):
+   ```bash
+   cp .env.example .env
+   ```
+
+3. **Start the full-stack development server**
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:3000` in your browser, or visit the **[Live Deployed Application](https://ais-pre-cefe6u3zggwfiu6fe5x5gk-530948025475.asia-east1.run.app)**.
